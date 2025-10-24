@@ -37,13 +37,19 @@ document.getElementById("add-book").addEventListener("click", (e) => {
     alert("Invalid inputs");
     clearInput();
   }
+  createBook();
   console.log(book_list);
 });
 document.getElementById("clear-input").addEventListener("click", (e) => {
   clearInput();
 });
-const div = document.createElement("div");
+
 div.classList.add("book_one");
 const book_grid = document.getElementsByClassName("book-grid");
 book_grid[0].appendChild(div);
 console.log(book_grid);
+
+function createBook() {
+  const div = document.createElement("div");
+  
+}
