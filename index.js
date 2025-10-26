@@ -15,6 +15,7 @@ let book_list = [];
 function addToLibrary(title, author, pages, status) {
   const newBook = new Book(title, author, pages, status);
   book_list.push(newBook);
+  displayLibrary(book_list);
 }
 function clearInput() {
   document.getElementById("book-title").value = "";
@@ -28,7 +29,9 @@ function addBookFrom() {
   const pages = document.getElementById("book-pages").value;
   const status = document.getElementById("book-status").value || "Not Read";
   if (title == "" || author == "") return false;
-  else addToLibrary(title, author, pages, status);
+  else {
+    addToLibrary(title, author, pages, status);
+  }
   clearInput();
 }
 document.getElementById("add-book").addEventListener("click", (e) => {
@@ -37,19 +40,52 @@ document.getElementById("add-book").addEventListener("click", (e) => {
     alert("Invalid inputs");
     clearInput();
   }
-  createBook();
-  console.log(book_list);
 });
 document.getElementById("clear-input").addEventListener("click", (e) => {
   clearInput();
 });
 
-div.classList.add("book_one");
-const book_grid = document.getElementsByClassName("book-grid");
-book_grid[0].appendChild(div);
-console.log(book_grid);
+function createBook(newBook) {
+  const book_div = document.createElement("div");
+  const book_heading = document.createElement("div");
+  const book_author = document.createElement("div");
+  const book_pages = document.createElement("div");
+  const book_status = document.createElement("div");
+  const remove_button = document.createElement("button");
+  const toggle_Status = document.createElement("button");
 
-function createBook() {
-  const div = document.createElement("div");
-  
+  book_div.classList.add("active");
+  book_heading.classList.add("heading");
+  book_author.classList.add("author");
+  book_pages.classList.add("pages");
+  book_status.classList.add("status");
+
+  book_heading.textContent = newBook.title;
+  book_author.textContent = newBook.author;
+  book_pages.textContent = newBook.pages;
+  book_status.textContent = newBook.status;
+  remove_button.dataset.id = newBook.id;
+  remove_button.textContent = "Remove";
+  if (newBook.status == "Read") toggle_Status.textContent = "Mark as Not Read";
+  else toggle_Status.textContent = "Mark as Read";
+
+  book_div.append(
+    book_heading,
+    book_author,
+    book_pages,
+    book_status,
+    remove_button,
+    toggle_Status
+  );
+  return book_div;
+}
+
+const book_grid = document.getElementById("book-grid");
+function displayLibrary(book_list) {
+  book_grid.innerHTML = "";
+  book_list.forEach((element) => {
+    const bookElement = createBook(element);
+    book_grid.appendChild(bookElement);
+  });
+  console.log(book_grid);
 }
