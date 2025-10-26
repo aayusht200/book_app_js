@@ -1,3 +1,14 @@
+:root {
+  --padding: 1rem;
+  --gap: 1rem;
+  --bg_color_body: rgba(255, 255, 255, 0.693);
+  --bg_color_container: rgb(255, 249, 241);
+  --border_color: rgb(171, 171, 171);
+  --input_color: rgb(255, 255, 255);
+  --box_shadow: rgb(210, 198, 182);
+  --bg_color_div: rgba(231, 207, 176, 0.657);
+}
+
 *,
 *::before,
 *::after {
@@ -5,8 +16,100 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+body,
+button {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+}
 body {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  background-color: var(--bg_color_body);
+  justify-content: center;
+}
+.container {
+  display: grid;
+  height: 100%;
+  width: 80%;
+  grid-template-rows: 20% 80%;
+  background-color: var(--bg_color_container);
+  box-shadow: 0px 0px 100px var(--box_shadow);
+}
+button {
+  border: 0.5px solid var(--border_color);
+  border-radius: 1rem;
+  padding: var(--padding);
+  background-color: var(--bg_color_body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-grid {
+  display: grid;
+  gap: var(--gap);
+}
+input {
+  border: 0.5px solid var(--border_color);
+  border-radius: 1rem;
+  max-height: 0.8rem;
+  padding: var(--padding);
+  background-color: var(--input_color);
+}
+.input-area {
+  display: flex;
+  gap: var(--gap);
+  padding: var(--padding);
+  align-items: center;
+  box-shadow: 0 1px 2px var(--box_shadow);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+@media (max-width: 1280px) {
+  .input-area {
+    flex-wrap: wrap;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  #book-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  #book-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  padding: var(--padding);
+  gap: var(--gap);
+}
+.active {
+  display: grid;
+  padding: var(--padding);
+  background-color: var(--bg_color_container);
+  max-height: fit-content;
+  gap: var(--gap);
+  box-shadow: 0 1px 2px var(--box_shadow);
+  border-radius: 1rem;
+  justify-items: center;
+}
+
+.active div {
+  box-shadow: 0 1px 2px var(--box_shadow);
+  border-radius: 1rem;
+  padding: var(--padding);
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: var(--bg_color_div);
 }

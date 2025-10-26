@@ -28,7 +28,7 @@ function addBookFrom() {
   const author = document.getElementById("book-author").value;
   const pages = document.getElementById("book-pages").value;
   const status = document.getElementById("book-status").value || "Not Read";
-  if (title == "" || author == "") return false;
+  if (title == "" || author == "" || pages == "") return false;
   else {
     addToLibrary(title, author, pages, status);
   }
@@ -66,8 +66,20 @@ function createBook(newBook) {
   book_status.textContent = newBook.status;
   remove_button.dataset.id = newBook.id;
   remove_button.textContent = "Remove";
+  toggle_Status.dataset.id = newBook.id;
+
   if (newBook.status == "Read") toggle_Status.textContent = "Mark as Not Read";
   else toggle_Status.textContent = "Mark as Read";
+
+  remove_button.addEventListener("click", () => {
+    book_list = book_list.filter((book) => book.id != newBook.id);
+    displayLibrary(book_list);
+  });
+
+  toggle_Status.addEventListener("click", () => {
+    newBook.toggleStatus();
+    displayLibrary(book_list);
+  });
 
   book_div.append(
     book_heading,
