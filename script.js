@@ -6,25 +6,33 @@ class book {
     this.status = status;
     this.id = crypto.randomUUID();
   }
-  static toggleStatus() {
-    this.status = this.status === "READ" ? "NOT READ" : "READ";
+  toggleStatus() {
+    this.status = this.status === "Read" ? "Not Read" : "Read";
+  }
+  test() {
+    console.log("hello");
   }
 }
 
-class library {
+export class library {
   constructor() {
-    const book_list = [];
+    this.book_list = [];
   }
   addBook(title, author, page, status) {
     const newBook = new book(title, author, page, status);
-    book_list.push(newBook);
+    // console.log(newBook);
+    this.book_list.push(newBook);
+  }
+  removeBook(id) {
+    this.book_list = this.book_list.filter((e) => e.id !== id);
+  }
+  toggleBookStatus(id) {
+    this.findBook(id).toggleStatus();
+  }
+  findBook(id) {
+    return this.book_list.find((e) => e.id === id);
   }
   getBookList() {
-    return book_list;
+    return this.book_list;
   }
 }
-
-let currentLibrary = new library();
-currentLibrary.addBook("one piece", "Echira Oda", 25, "READ");
-currentLibrary.addBook("one piece", "Echira Oda", 28, "NOT READ");
-console.log(currentLibrary.getBookList());
