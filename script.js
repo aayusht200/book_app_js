@@ -19,9 +19,9 @@ class library {
     const newBook = new book(title, author, page, status);
     book_list.push(newBook);
   }
-//   getBookList() {
-//     return book_list;
-//   }
+  getBookList() {
+    return book_list;
+  }
 }
 
 let currentLibrary = new library();
