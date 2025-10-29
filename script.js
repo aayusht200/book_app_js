@@ -7,16 +7,20 @@ class book {
     this.id = crypto.randomUUID();
   }
   toggleStatus() {
-    this.status = this.status === "READ" ? "NOT READ" : "READ";
+    this.status = this.status === "Read" ? "Not Read" : "Read";
+  }
+  test() {
+    console.log("hello");
   }
 }
 
-class library {
+export class library {
   constructor() {
     this.book_list = [];
   }
   addBook(title, author, page, status) {
     const newBook = new book(title, author, page, status);
+    // console.log(newBook);
     this.book_list.push(newBook);
   }
   removeBook(id) {
@@ -32,11 +36,3 @@ class library {
     return this.book_list;
   }
 }
-
-let currentLibrary = new library();
-currentLibrary.addBook("One Piece", "Eiichiro Oda", 25, "Not Read");
-currentLibrary.addBook("Naruto", "Masashi Kishimoto", 28, "Not Read");
-
-console.log(JSON.parse(JSON.stringify(currentLibrary.getBookList())));
-currentLibrary.toggleBookStatus(currentLibrary.getBookList()[0].id);
-console.log(JSON.parse(JSON.stringify(currentLibrary.getBookList())));
